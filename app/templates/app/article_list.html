@@ -1,15 +1,44 @@
+{% load static %}
 <!DOCTYPE html>
+<link rel="stylesheet" href="{% static 'css/style.css' %}"  type="text/css">
 <html>
+    <!-- 在内容列表上方添加搜索框 -->
+<form method="get">
+    <input type="text" name="q" value="{{ search_query }}" placeholder="搜索文章...">
+    <button type="submit">搜索</button>
+</form>
 <head>
     <title>列表</title>
 </head>
+<div class="tag-cloud">
+    <h3>文章分类</h3>
+    {% for tag in all_tags %}
+        <a href="?tag={{ tag.name }}" class="tag">{{ tag.name }}</a>
+    {% endfor %}
+</div>
 <body>
     <h1>最新</h1>
-    {% for article in articles %}
+    {% for article in page_obj %}
     <div>
         <h2><a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a></h2>
         <p>发布时间：{{ article.pub_date|date:"Y-m-d H:i" }}</p>
+        <p>{{ article.abstract }}</p>        
     </div>
     {% endfor %}
+
+    <!-- 添加分页导航 -->
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page=1&q={{ search_query }}&tag={{ tag_filter }}">首页</a>
+        <a href="?page={{ page_obj.previous_page_number }}&q={{ search_query }}&tag={{ tag_filter }}">上一页</a>
+    {% endif %}
+    
+    <span>第 {{ page_obj.number }} 页 / 共 {{ page_obj.paginator.num_pages }} 页</span>
+    
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}&q={{ search_query }}&tag={{ tag_filter }}">下一页</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}&q={{ search_query }}&tag={{ tag_filter }}">末页</a>
+    {% endif %}
+</div>
 </body>
 </html>

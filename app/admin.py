@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Article
+from .models import Article, Tag
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django import forms
 from django.contrib import admin
@@ -7,7 +7,12 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.admin import AdminSite
 from django.contrib.auth.models import User, Group
 from django.utils.html import format_html
+from django.utils.text import slugify
 
+class TagAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',)}
+
+admin.site.register(Tag, TagAdmin)
 
 
 class ArticleAdminForm(forms.ModelForm):
@@ -19,10 +24,13 @@ class ArticleAdminForm(forms.ModelForm):
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
     form = ArticleAdminForm
-    list_display = ('title', 'abstract', 'pub_date', 'source')
+    list_display = ('title', 'abstract', 'pub_date', 'source', 'get_tags')
     search_fields = ('title', 'content')
+    filter_horizontal = ('tag',)  # 添加多选标签界面
 
-
+    def get_tags(self, obj):
+        return ", ".join([str(tag) for tag in obj.tag.all()])
+    get_tags.short_description = '标签'
 
 
 # class MyAdminSite(AdminSite):
