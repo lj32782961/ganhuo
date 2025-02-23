@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-x)0r$$8bj9yf(a6ns%84ivbt(nj+uk^8k0$@!)k!myk+48-s86
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -85,6 +85,9 @@ DATABASES = {
         'PASSWORD': 'Luxin05091832!',
         'HOST': 'localhost',
         'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
@@ -124,6 +127,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]#原来的是“STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),” 注意：双引号中的逗号不可以省略，不然报错。
+
+# 生产环境下使用 `collectstatic` 统一收集静态文件的目标文件夹
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # 部署时使用
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'# 部署咋render.com时使用
 
 MEDIA_URL = '/media/'
 #注意，media文件夹在根目录下和app，webapp同级
