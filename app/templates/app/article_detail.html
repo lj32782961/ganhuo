@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ article.title }}</title>
+</head>
+<body>
+    <h1>{{ article.title }}</h1>
+    <p>发布时间：{{ article.pub_date|date:"Y-m-d H:i" }}（最后更新：{{ article.update_date|date:"Y-m-d H:i" }}）</p>
+    <hr>
+    <div>{{ article.content|safe }}</div>
+    <a href="{% url 'article_list' %}">返回列表</a>
+</body>
+</html>
