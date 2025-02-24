@@ -8,6 +8,50 @@
     <p>发布时间：{{ article.pub_date|date:"Y-m-d H:i" }}（最后更新：{{ article.update_date|date:"Y-m-d H:i" }}）</p>
     <hr>
     <div>{{ article.content|safe }}</div>
+
+    <h2>分享到：</h2>
+    <div id="share-buttons">
+        <a href="#" onclick="shareOn('微信', 'weixin'); return false;" class="share-button">微信</a>
+        <a href="#" onclick="shareOn('QQ', 'qq'); return false;" class="share-button">QQ</a>
+        <a href="#" onclick="shareOn('WhatsApp', 'whatsapp'); return false;" class="share-button">WhatsApp</a>
+        <a href="#" onclick="shareOn('X', 'x'); return false;" class="share-button">X (Twitter)</a>
+        <a href="#" onclick="shareOn('Instagram', 'instagram'); return false;" class="share-button">Instagram</a>
+    </div>
+
     <a href="{% url 'article_list' %}">返回列表</a>
+
+    <script>
+        function shareOn(platform, type) {
+            const url = window.location.href;
+            const title = document.title;
+            let shareUrl;
+
+            switch (type) {
+                case 'weixin':
+                    // 微信分享，需要在微信公众号平台设置好JS-SDK
+                    // 此处仅为示例，实际实现需要根据微信官方文档进行配置
+                    alert("微信分享功能需要在微信公众号平台进行配置");
+                    break;
+                case 'qq':
+                    shareUrl = `http://connect.qq.com/widget/shareqq/index.html?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`;
+                    window.open(shareUrl, '_blank');
+                    break;
+                case 'whatsapp':
+                    shareUrl = `whatsapp://send?text=${encodeURIComponent(`${title} ${url}`)}`;
+                    window.open(shareUrl, '_blank');
+                    break;
+                case 'x': // X (formerly Twitter)
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+                    window.open(shareUrl, '_blank');
+                    break;
+                case 'instagram':
+                    shareUrl = `https://www.instagram.com/direct/inbox/create/?text=${encodeURIComponent(`${title} ${url}`)}`;
+                    window.open(shareUrl, '_blank');
+                    break;
+                default:
+                    alert(`不支持${platform}分享`);
+            }
+        }
+    </script>
 </body>
 </html>
