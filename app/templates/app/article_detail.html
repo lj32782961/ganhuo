@@ -1,24 +1,64 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang = 'zh'>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'ckeditor/styles.css' %}">
     <title>{{ article.title }}</title>
 </head>
 <body>
-    <h1>{{ article.title }}</h1>
-    <p>发布时间：{{ article.pub_date|date:"Y-m-d H:i" }}（最后更新：{{ article.update_date|date:"Y-m-d H:i" }}）</p>
-    <hr>
-    <div>{{ article.content|safe }}</div>
+    <!-- 顶部导航 -->
+    <header class="navbar">
+        <h2>网站标题</h2>
+    </header>
 
-    <h2>分享到：</h2>
-    <div id="share-buttons">
-        <a href="#" onclick="shareOn('微信', 'weixin'); return false;" class="share-button">微信</a>
-        <a href="#" onclick="shareOn('QQ', 'qq'); return false;" class="share-button">QQ</a>
-        <a href="#" onclick="shareOn('WhatsApp', 'whatsapp'); return false;" class="share-button">WhatsApp</a>
-        <a href="#" onclick="shareOn('X', 'x'); return false;" class="share-button">X (Twitter)</a>
-        <a href="#" onclick="shareOn('Instagram', 'instagram'); return false;" class="share-button">Instagram</a>
+    <!-- 页面内容 -->
+    <div class="content-wrapper">
+        <!-- 左侧文章内容 -->
+        <main class = 'main-content'>
+            <h1>{{ article.title }}</h1>
+            <p>发布时间：{{ article.pub_date|date:"Y-m-d H:i" }}（最后更新：{{ article.update_date|date:"Y-m-d H:i" }}）</p>
+            <hr>
+        
+            <div class="page-container">
+                {{ article.content|safe }}
+            </div>
+            
+            <h2>分享到：</h2>
+            <div id="share-buttons">
+                <a href="#" onclick="shareOn('微信', 'weixin'); return false;" class="share-button">微信</a>
+                <a href="#" onclick="shareOn('QQ', 'qq'); return false;" class="share-button">QQ</a>
+                <a href="#" onclick="shareOn('WhatsApp', 'whatsapp'); return false;" class="share-button">WhatsApp</a>
+                <a href="#" onclick="shareOn('X', 'x'); return false;" class="share-button">X (Twitter)</a>
+                <a href="#" onclick="shareOn('Instagram', 'instagram'); return false;" class="share-button">Instagram</a>
+            </div>
+        
+            <a href="{% url 'article_list' %}">返回列表</a>
+        </main>
+
+        <!-- 右侧 文章标签 & 热门文章 -->
+        <aside class="sidebar">
+            <h3>标签云</h3>
+            <ul>
+                {% for tag in all_tags %}
+                    <li> <a href="{% url 'article_list' %}?tag={{ tag.name }}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %} </li>
+                {% endfor %}
+            </ul>
+
+            <h3>高热度文章</h3>
+            <ul>
+                {% for hot_article in hot_articles %}
+                    <li><a href="{% url 'article_detail' hot_article.id %}">{{ hot_article.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </aside>
+
     </div>
 
-    <a href="{% url 'article_list' %}">返回列表</a>
+
+    
+
 
     <script>
         function shareOn(platform, type) {

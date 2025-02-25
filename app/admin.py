@@ -11,6 +11,7 @@ from django.utils.text import slugify
 
 class TagAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
+    search_fields = ('name',)
 
 admin.site.register(Tag, TagAdmin)
 
@@ -24,8 +25,8 @@ class ArticleAdminForm(forms.ModelForm):
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
     form = ArticleAdminForm
-    list_display = ('title', 'abstract', 'pub_date', 'source', 'get_tags')
-    search_fields = ('title', 'content')
+    list_display = ('title', 'abstract', 'views', 'pub_date', 'source', 'get_tags')
+    search_fields = ('pub_date', 'source', 'get_tags')
     filter_horizontal = ('tag',)  # 添加多选标签界面
 
     def get_tags(self, obj):

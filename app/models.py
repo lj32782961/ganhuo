@@ -19,6 +19,7 @@ class Article(models.Model):
     image = models.ImageField(upload_to='img/', blank=True, null=True,verbose_name='图片')
     pub_date = models.DateTimeField(auto_now_add=True, verbose_name='发布时间')
     update_date = models.DateTimeField(auto_now=True, verbose_name='修改时间')
+    views = models.PositiveIntegerField(default=0, verbose_name='浏览量')
     tag = models.ManyToManyField(Tag, blank=True)
     source = models.CharField(max_length=200, verbose_name="来源")
 

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'app',
+    'django_apscheduler',
 ]
 
 MIDDLEWARE = [
@@ -147,6 +148,12 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'full',
         'height': 300,
         'width': '100%',
+        
+        'extraPlugins': ','.join([
+            'templates',
+        ]),
+        'templates_files': ['/static/ckeditor/templates/templates.js'],
+        'contentsCss': ['/static/ckeditor/styles.css'],  # 编辑时加载样式
     },
 }
 

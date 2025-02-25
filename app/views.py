@@ -3,8 +3,13 @@ from .models import Article, Tag
 from django.http import HttpResponse
 from django.core.paginator import Paginator,PageNotAnInteger, EmptyPage
 from django.db.models import Q
+import datetime
+from django.utils import timezone
 
 def article_list(request):
+    # 获取热门文章（可根据阅读量排序）
+    hot_articles = Article.objects.all().order_by('-views')[:5]
+
     search_query = request.GET.get('q', '')
     tag_filter = request.GET.get('tag', '')
 
@@ -34,13 +39,14 @@ def article_list(request):
         page_obj = paginator.get_page(paginator.num_pages)
 
 
-    #标签云
-    all_tags = Tag.objects.all()
-
     # 检查搜索结果是否为空
     no_results = False
     if not page_obj.object_list:
         no_results = True
+
+    #标签云
+    all_tags = Tag.objects.all()
+
 
     context = {
         'page_obj': page_obj,
@@ -48,6 +54,7 @@ def article_list(request):
         'tag_filter': tag_filter,
         'all_tags': all_tags,
         'no_results': no_results,
+        'hot_articles':hot_articles,
     }
     return render(request, 'app/article_list.html', context)
     #return render(request, 'app/article_list.html', {'articles': articles})
@@ -58,9 +65,21 @@ def article_list(request):
 #     return render(request, 'app/article_detail.html', {'article': article})
 
 def article_detail(request, pk):
+    # 获取热门文章（可根据阅读量排序）
+    hot_articles = Article.objects.all().order_by('-views')[:5]
+    #标签云
+    all_tags = Tag.objects.all()
     try:
         article = Article.objects.get(pk=pk) # 使用get()方法，如果不存在会抛出DoesNotExist异常
-        return render(request, 'app/article_detail.html', {'article': article})
+        article.views = article.views+1
+        article.save(update_fields=['views'])  # 只更新views字段，提高效率
+
+        context = {
+        'article': article,
+        'all_tags': all_tags,
+        'hot_articles':hot_articles,
+    }
+        return render(request, 'app/article_detail.html', context)
     except Article.DoesNotExist:
         return render(request, 'app/error.html')
     except Exception as e:  # 捕获其他异常
@@ -68,3 +87,22 @@ def article_detail(request, pk):
 
 def contact(request):
     return render(request, 'app/contact.html')
+
+
+def create_german_article():
+    title = f"自动生成的标题 {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+    abstract = "这是一篇自动生成的摘要。"
+    content = "<p>这是一篇自动生成的RichText内容。</p>"  # RichTextUploadingField 需要 HTML
+    source = "本站"
+
+    # 查找或创建标签 (例如，创建一个名为'自动生成'的标签)
+    tag, created = Tag.objects.get_or_create(name='自动生成', slug='auto-generated')
+
+    article = Article(
+        title=title,
+        abstract=abstract,
+        content=content,
+        source=source,
+    )
+    article.save()
+    article.tag.add(tag) # 使用 add() 方法添加标签
