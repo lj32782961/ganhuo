@@ -42,7 +42,7 @@
             <h3>标签云</h3>
             <ul>
                 {% for tag in all_tags %}
-                    <li> <a href="{% url 'article_list' %}?tag={{ tag.name }}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %} </li>
+                    <li> <a href="{% url 'article_list' %}?tag={{ tag.name }}">{{ tag.name }}</a>{% if not forloop.last %} {% endif %} </li>
                 {% endfor %}
             </ul>
 
