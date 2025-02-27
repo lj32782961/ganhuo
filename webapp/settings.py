@@ -109,13 +109,26 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+    'django.middleware.locale.LocaleMiddleware',  # 语言切换中间件
 ]
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+from django.utils.translation import gettext_lazy as _
+LANGUAGE_CODE = 'zh-hans'#默认语言
+LANGUAGES = [
+    ('en', _('English')),
+    ('zh-hans', _('Chinese')),
+    ('de', _('German')),
+    ('fr', _('French')),
+]
+USE_I18N = True  # 启用国际化
+USE_L10N = True  # 启用本地化
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),  # 语言文件存储位置
+]
 
 TIME_ZONE = 'UTC'
 

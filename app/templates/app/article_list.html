@@ -1,33 +1,45 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
-<link rel="stylesheet" href="{% static 'css/style.css' %}"  type="text/css">
 <html>
-    <!-- 在内容列表上方添加搜索框 -->
-<form method="get">
-    <input type="text" name="q" value="{{ search_query }}" placeholder="搜索文章...">
-    <button type="submit">搜索</button>
-    <!-- <a href="{% url 'article_list' %}"><button type="button">清除</button></a> -->
-</form>
 <head>
-    <title>列表</title>
+    <title>{% trans "Article List" %}</title>
+     <link rel="stylesheet" href="{% static 'css/style.css' %}"  type="text/css">
 </head>
-<div class="tag-cloud">
-    <h3>标签</h3>
-    {% for tag in all_tags %}
-        <a href="?tag={{ tag.name }}" class="tag">{{ tag.name }}</a>
-        <!-- <a href="?tag={{ tag.name }}&q={{search_query}}" class="tag">{{ tag.name }}</a> -->
-    {% endfor %}
-</div>
-<a href="{% url 'article_list' %}"><button type="button">清除搜索</button></a>
+
 <body>
-    <h1>最新</h1>
+    <!-- 语言切换 -->
+    <div class="language-switch">
+        <a href="{% url 'switch_language' 'en' %}">English</a> |
+<a href="{% url 'switch_language' 'zh-hans' %}">中文</a> |
+<a href="{% url 'switch_language' 'de' %}">Deutsch</a> |
+<a href="{% url 'switch_language' 'fr' %}">Français</a>
+    </div>
+
+    <!-- 在内容列表上方添加搜索框 -->
+    <form method="get">
+        <input type="text" name="q" value="{{ search_query }}" placeholder="{% trans 'Search articles...' %}">
+        <button type="submit">{% trans 'search' %}</button>
+        <!-- <a href="{% url 'article_list' %}"><button type="button">清除</button></a> -->
+    </form>
+    
+    <div class="tag-cloud">
+        <h3>{% trans "Tags" %}</h3>
+        {% for tag in all_tags %}
+            <a href="?tag={{ tag.name }}" class="tag">{{ tag.name }}</a>
+            <!-- <a href="?tag={{ tag.name }}&q={{search_query}}" class="tag">{{ tag.name }}</a> -->
+        {% endfor %}
+    </div>
+    <a href="{% url 'article_list' %}"><button type="button">{% trans "Clear Search" %}</button></a>
+
+    <h1>{% trans "Latest Articles" %}</h1>
     {% if no_results %}
-    <p>无结果，请换个关键词搜索</p>
+    <p>{% trans "No results found, please try a different keyword." %}</p>
     {% else %}
         {% for article in page_obj %}
         <div>
             <h2><a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a></h2>
-            <p>发布时间：{{ article.pub_date|date:"Y-m-d H:i" }}, 标签：
+            <p>{% trans "Published on" %}: {{ article.pub_date|date:"Y-m-d H:i" }}, {% trans "Tags" %}：
                 {% if article.tag.all %}
                     {% for tag in article.tag.all %}
                         <a href="?tag={{ tag.name }}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
@@ -44,15 +56,15 @@
     <!-- 添加分页导航 -->
     <div class="pagination">
         {% if page_obj.has_previous %}
-            <a href="?page=1&q={{ search_query }}&tag={{ tag_filter }}">首页</a>
-            <a href="?page={{ page_obj.previous_page_number }}&q={{ search_query }}&tag={{ tag_filter }}">上一页</a>
+            <a href="?page=1&q={{ search_query }}&tag={{ tag_filter }}">{% trans "First Page" %}</a>
+            <a href="?page={{ page_obj.previous_page_number }}&q={{ search_query }}&tag={{ tag_filter }}">{% trans "Previous" %}</a>
         {% endif %}
         
-        <span>第 {{ page_obj.number }} 页 / 共 {{ page_obj.paginator.num_pages }} 页</span>
+        <span>{% trans "Page" %} {{ page_obj.number }} {% trans " " %} / {{ page_obj.paginator.num_pages }} </span>
         
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}&q={{ search_query }}&tag={{ tag_filter }}">下一页</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}&q={{ search_query }}&tag={{ tag_filter }}">末页</a>
+            <a href="?page={{ page_obj.next_page_number }}&q={{ search_query }}&tag={{ tag_filter }}">{% trans "Next" %}</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}&q={{ search_query }}&tag={{ tag_filter }}">{% trans "Last Page" %}</a>
         {% endif %}
     {% endif %}
 </div>

@@ -5,6 +5,8 @@ from django.core.paginator import Paginator,PageNotAnInteger, EmptyPage
 from django.db.models import Q
 import datetime
 from django.utils import timezone
+from django.conf import settings
+from django.utils.translation import activate
 
 def article_list(request):
     # 获取热门文章（可根据阅读量排序）
@@ -88,6 +90,16 @@ def article_detail(request, pk):
 def contact(request):
     return render(request, 'app/contact.html')
 
+def switch_language(request, lang_code):
+    """
+    切换语言并存入 session
+    """
+    if lang_code in dict(settings.LANGUAGES).keys():  # 确保 lang_code 是支持的语言
+        activate(lang_code)
+        request.session['django_language'] = lang_code
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
 
 def create_german_article():
     title = f"自动生成的标题 {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
@@ -106,3 +118,5 @@ def create_german_article():
     )
     article.save()
     article.tag.add(tag) # 使用 add() 方法添加标签
+
+from django.utils.translation import gettext as _
