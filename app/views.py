@@ -49,6 +49,9 @@ def article_list(request):
     #标签云
     all_tags = Tag.objects.all()
 
+    #语言设置
+    current_language_name = dict(settings.LANGUAGES).get(request.LANGUAGE_CODE, '')
+
 
     context = {
         'page_obj': page_obj,
@@ -57,6 +60,7 @@ def article_list(request):
         'all_tags': all_tags,
         'no_results': no_results,
         'hot_articles':hot_articles,
+        'current_language_name': current_language_name,
     }
     return render(request, 'app/article_list.html', context)
     #return render(request, 'app/article_list.html', {'articles': articles})

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-27 00:08+0100\n"
+"POT-Creation-Date: 2025-03-03 13:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,71 +22,75 @@ msgstr ""
 msgid "Article List"
 msgstr "文章列表"
 
-#: .\app\templates\app\article_list.html:21
+#: .\app\templates\app\article_list.html:14
+msgid "当前语言："
+msgstr ""
+
+#: .\app\templates\app\article_list.html:26
 msgid "Search articles..."
 msgstr "搜索文章"
 
-#: .\app\templates\app\article_list.html:22
+#: .\app\templates\app\article_list.html:27
 msgid "search"
 msgstr "搜索"
 
-#: .\app\templates\app\article_list.html:27
-#: .\app\templates\app\article_list.html:42
+#: .\app\templates\app\article_list.html:32
+#: .\app\templates\app\article_list.html:47
 msgid "Tags"
 msgstr "标签"
 
-#: .\app\templates\app\article_list.html:33
+#: .\app\templates\app\article_list.html:38
 msgid "Clear Search"
 msgstr "清除搜索"
 
-#: .\app\templates\app\article_list.html:35
+#: .\app\templates\app\article_list.html:40
 msgid "Latest Articles"
 msgstr "最新文章"
 
-#: .\app\templates\app\article_list.html:37
+#: .\app\templates\app\article_list.html:42
 msgid "No results found, please try a different keyword."
 msgstr "无搜索结果，请换个关键词尝试"
 
-#: .\app\templates\app\article_list.html:42
+#: .\app\templates\app\article_list.html:47
 msgid "Published on"
 msgstr "发布日期"
 
-#: .\app\templates\app\article_list.html:59
+#: .\app\templates\app\article_list.html:64
 msgid "First Page"
 msgstr "首页"
 
-#: .\app\templates\app\article_list.html:60
+#: .\app\templates\app\article_list.html:65
 msgid "Previous"
 msgstr "上一页"
 
-#: .\app\templates\app\article_list.html:63
+#: .\app\templates\app\article_list.html:68
 msgid "Page"
 msgstr "第"
 
-#: .\app\templates\app\article_list.html:63
+#: .\app\templates\app\article_list.html:68
 msgid " "
 msgstr "页"
 
-#: .\app\templates\app\article_list.html:66
+#: .\app\templates\app\article_list.html:71
 msgid "Next"
 msgstr "下一页"
 
-#: .\app\templates\app\article_list.html:67
+#: .\app\templates\app\article_list.html:72
 msgid "Last Page"
 msgstr "末页"
 
-#: .\webapp\settings.py:122
+#: .\webapp\settings.py:125
 msgid "English"
 msgstr "English"
 
-#: .\webapp\settings.py:123
+#: .\webapp\settings.py:126
 msgid "Chinese"
 msgstr ""
 
-#: .\webapp\settings.py:124
+#: .\webapp\settings.py:127
 msgid "German"
 msgstr "Deutsch"
 
-#: .\webapp\settings.py:125
+#: .\webapp\settings.py:128
 msgid "French"
 msgstr ""

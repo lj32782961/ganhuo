@@ -123,9 +123,9 @@ LANGUAGE_CODE = 'zh-hans'#默认语言
 
 LANGUAGES = [
     ('en', _('English')),
-    ('zh-hans', _('Chinese')),
-    ('de', _('German')),
-    ('fr', _('French')),
+    ('zh-hans', _('简体中文')),
+    ('de', _('Deutsch')),
+    ('fr', _('Francés')),
 ]
 USE_I18N = True  # 启用国际化
 USE_L10N = True  # 启用本地化

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-27 00:17+0100\n"
+"POT-Creation-Date: 2025-03-03 13:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,71 +22,75 @@ msgstr ""
 msgid "Article List"
 msgstr "Artikelliste"
 
-#: .\app\templates\app\article_list.html:21
+#: .\app\templates\app\article_list.html:14
+msgid "当前语言："
+msgstr "Aktuelle Sprache"
+
+#: .\app\templates\app\article_list.html:26
 msgid "Search articles..."
 msgstr "Artikel suchen..."
 
-#: .\app\templates\app\article_list.html:22
+#: .\app\templates\app\article_list.html:27
 msgid "search"
 msgstr "Suche"
 
-#: .\app\templates\app\article_list.html:27
-#: .\app\templates\app\article_list.html:42
+#: .\app\templates\app\article_list.html:32
+#: .\app\templates\app\article_list.html:47
 msgid "Tags"
 msgstr "Tags"
 
-#: .\app\templates\app\article_list.html:33
+#: .\app\templates\app\article_list.html:38
 msgid "Clear Search"
 msgstr "Suche löschen"
 
-#: .\app\templates\app\article_list.html:35
+#: .\app\templates\app\article_list.html:40
 msgid "Latest Articles"
 msgstr "Neueste Artikel"
 
-#: .\app\templates\app\article_list.html:37
+#: .\app\templates\app\article_list.html:42
 msgid "No results found, please try a different keyword."
 msgstr "Keine Ergebnisse gefunden, bitte versuchen Sie ein anderes Stichwort."
 
-#: .\app\templates\app\article_list.html:42
+#: .\app\templates\app\article_list.html:47
 msgid "Published on"
 msgstr "Veröffentlicht am"
 
-#: .\app\templates\app\article_list.html:59
+#: .\app\templates\app\article_list.html:64
 msgid "First Page"
 msgstr "Startseite"
 
-#: .\app\templates\app\article_list.html:60
+#: .\app\templates\app\article_list.html:65
 msgid "Previous"
 msgstr "Vorherige"
 
-#: .\app\templates\app\article_list.html:63
+#: .\app\templates\app\article_list.html:68
 msgid "Page"
 msgstr "Seite"
 
-#: .\app\templates\app\article_list.html:63
+#: .\app\templates\app\article_list.html:68
 msgid " "
 msgstr " "
 
-#: .\app\templates\app\article_list.html:66
+#: .\app\templates\app\article_list.html:71
 msgid "Next"
 msgstr "Nächste"
 
-#: .\app\templates\app\article_list.html:67
+#: .\app\templates\app\article_list.html:72
 msgid "Last Page"
 msgstr "Letzte Seite"
 
-#: .\webapp\settings.py:122
+#: .\webapp\settings.py:125
 msgid "English"
 msgstr ""
 
-#: .\webapp\settings.py:123
+#: .\webapp\settings.py:126
 msgid "Chinese"
 msgstr ""
 
-#: .\webapp\settings.py:124
+#: .\webapp\settings.py:127
 msgid "German"
 msgstr ""
 
-#: .\webapp\settings.py:125
+#: .\webapp\settings.py:128
 msgid "French"
 msgstr ""
