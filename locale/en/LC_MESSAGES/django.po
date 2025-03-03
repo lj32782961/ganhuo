@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 13:15+0100\n"
+"POT-Creation-Date: 2025-03-03 13:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,33 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\app\templates\app\article_list.html:6
+#: .\app\templates\app\article_detail.html:22
+msgid "发布时间"
+msgstr "Published on"
+
+#: .\app\templates\app\article_detail.html:22
+msgid "最后更新"
+msgstr "Updated on"
+
+#: .\app\templates\app\article_detail.html:29
+msgid "分享到"
+msgstr "Share to"
+
+#: .\app\templates\app\article_detail.html:38
+msgid "返回列表"
+msgstr "Go to article list"
+
+#: .\app\templates\app\article_detail.html:43
+msgid "标签云"
+msgstr "Tags"
+
+#: .\app\templates\app\article_detail.html:50
+msgid "高热度文章"
+msgstr "Hot articles"
+
+#: .\app\templates\app\article_list.html:7
 msgid "Article List"
 msgstr ""
-
-#: .\app\templates\app\article_list.html:14
-msgid "当前语言："
-msgstr "Current language"
 
 #: .\app\templates\app\article_list.html:26
 msgid "Search articles..."
@@ -84,13 +104,16 @@ msgid "English"
 msgstr ""
 
 #: .\webapp\settings.py:126
-msgid "Chinese"
+msgid "简体中文"
 msgstr ""
 
 #: .\webapp\settings.py:127
-msgid "German"
+msgid "Deutsch"
 msgstr ""
 
 #: .\webapp\settings.py:128
-msgid "French"
+msgid "Francés"
 msgstr ""
+
+#~ msgid "当前语言："
+#~ msgstr "Current language"

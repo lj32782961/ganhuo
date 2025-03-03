@@ -69,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'app.context_processors.current_language_name',  # 添加自定义的上下文处理器
             ],
         },
     },
@@ -120,7 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 from django.utils.translation import gettext_lazy as _
 LANGUAGE_CODE = 'zh-hans'#默认语言
-
+LANGUAGE_COOKIE_NAME = 'django_language'
 LANGUAGES = [
     ('en', _('English')),
     ('zh-hans', _('简体中文')),
@@ -178,4 +179,3 @@ CKEDITOR_CONFIGS = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LANGUAGE_COOKIE_NAME = 'django_language'

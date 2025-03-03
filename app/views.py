@@ -50,7 +50,7 @@ def article_list(request):
     all_tags = Tag.objects.all()
 
     #语言设置
-    current_language_name = dict(settings.LANGUAGES).get(request.LANGUAGE_CODE, '')
+    # current_language_name = dict(settings.LANGUAGES).get(request.LANGUAGE_CODE, '')
 
 
     context = {
@@ -60,7 +60,7 @@ def article_list(request):
         'all_tags': all_tags,
         'no_results': no_results,
         'hot_articles':hot_articles,
-        'current_language_name': current_language_name,
+        
     }
     return render(request, 'app/article_list.html', context)
     #return render(request, 'app/article_list.html', {'articles': articles})
@@ -134,3 +134,11 @@ def create_german_article():
     article.tag.add(tag) # 使用 add() 方法添加标签
 
 from django.utils.translation import gettext as _
+
+
+def current_language_name(request):
+    # 从 LANGUAGES 中获取当前语言的名称
+    current_language_name = dict(settings.LANGUAGES).get(request.LANGUAGE_CODE, '')
+    return {
+        'current_language_name': current_language_name,
+    }
