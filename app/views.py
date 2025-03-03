@@ -90,15 +90,25 @@ def article_detail(request, pk):
 def contact(request):
     return render(request, 'app/contact.html')
 
+from django.utils import translation
+from django.http import HttpResponseRedirect
 def switch_language(request, lang_code):
     """
     切换语言并存入 session
     """
     if lang_code in dict(settings.LANGUAGES).keys():  # 确保 lang_code 是支持的语言
-        activate(lang_code)
+        # activate(lang_code)
+        # request.session['django_language'] = lang_code
+        # 激活当前请求的语言
+        translation.activate(lang_code)
+        # 存入Session，供后续请求使用
         request.session['django_language'] = lang_code
-
-    return redirect(request.META.get('HTTP_REFERER', '/'))
+        # 创建重定向响应
+        response = HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        # 将语言代码存入Cookie
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang_code)
+        return response
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 def create_german_article():

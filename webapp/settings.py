@@ -47,11 +47,13 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  # 语言切换中间件
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'webapp.urls'
@@ -109,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
-    'django.middleware.locale.LocaleMiddleware',  # 语言切换中间件
+    
 ]
 
 
@@ -118,6 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 from django.utils.translation import gettext_lazy as _
 LANGUAGE_CODE = 'zh-hans'#默认语言
+
 LANGUAGES = [
     ('en', _('English')),
     ('zh-hans', _('Chinese')),
@@ -126,15 +129,14 @@ LANGUAGES = [
 ]
 USE_I18N = True  # 启用国际化
 USE_L10N = True  # 启用本地化
+USE_TZ = True
+
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),  # 语言文件存储位置
 ]
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
-
-USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -174,3 +176,6 @@ CKEDITOR_CONFIGS = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+LANGUAGE_COOKIE_NAME = 'django_language'

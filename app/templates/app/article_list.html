@@ -4,18 +4,23 @@
 <html>
 <head>
     <title>{% trans "Article List" %}</title>
+    <script src="{% static 'js/lang.js' %}"></script>
      <link rel="stylesheet" href="{% static 'css/style.css' %}"  type="text/css">
 </head>
 
 <body>
     <!-- 语言切换 -->
     <div class="language-switch">
-        <a href="{% url 'switch_language' 'en' %}">English</a> |
-<a href="{% url 'switch_language' 'zh-hans' %}">中文</a> |
-<a href="{% url 'switch_language' 'de' %}">Deutsch</a> |
-<a href="{% url 'switch_language' 'fr' %}">Français</a>
+        <span id="language-button">🌍 <span id="current-language">{% trans '当前语言：' %}{{ request.LANGUAGE_CODE }}</span></span>
+        <ul id="language-dropdown" class="hidden">
+            <li><a href="{% url 'switch_language' 'en' %}" >English</a></li>
+            <li><a href="{% url 'switch_language' 'zh-hans' %}" >中文</a></li>
+            <li><a href="{% url 'switch_language' 'de' %}" >Deutsch</a></li>
+            <li><a href="{% url 'switch_language' 'fr' %}">Français</a></li>
+        </ul>
     </div>
-
+ 
+    
     <!-- 在内容列表上方添加搜索框 -->
     <form method="get">
         <input type="text" name="q" value="{{ search_query }}" placeholder="{% trans 'Search articles...' %}">
@@ -42,7 +47,7 @@
             <p>{% trans "Published on" %}: {{ article.pub_date|date:"Y-m-d H:i" }}, {% trans "Tags" %}：
                 {% if article.tag.all %}
                     {% for tag in article.tag.all %}
-                        <a href="?tag={{ tag.name }}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
+                        <a class="tag-cloud" href="?tag={{ tag.name }}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
                         <!-- {{ tag.name }} {% if not forloop.last %}, {% endif %} -->
                     {% endfor %}
                 {% else %}
@@ -69,4 +74,7 @@
     {% endif %}
 </div>
 </body>
+<script>
+
+</script>
 </html>
